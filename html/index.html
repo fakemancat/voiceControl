@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>voiceControl</title>
+</head>
+<body>
+    <textarea id="textarea" oninput="a(this.value)"></textarea>
+
+    <script>
+        const socket = new WebSocket('ws://192.168.137.1:3000');
+
+        socket.onopen = () => console.log('connected');
+
+        function a(text) {
+            const lastWord = text.split(' ').slice(-1)[0];
+            socket.send(lastWord);
+        }
+    </script>
+</body>
+</html>
